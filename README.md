@@ -1,9 +1,9 @@
-# Overlook
+# Overlook for Filament
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 
-This plugin adds an app overview widget to your admin panel plugin.
+A Filament plugin that adds an app overview widget to your admin panel.
 
 ## Installation
 
@@ -17,12 +17,6 @@ Optionally, you can publish the views using
 
 ```bash
 php artisan vendor:publish --tag="overlook-views"
-```
-
-## Testing
-
-```bash
-composer test
 ```
 
 ## Changelog

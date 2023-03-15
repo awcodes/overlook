@@ -1,6 +1,6 @@
 {
     "name": "awcodes/overlook",
-    "description": "This is my package overlook",
+    "description": "A Filament plugin that adds an app overview widget to your admin panel.",
     "keywords": [
         "awcodes",
         "laravel",

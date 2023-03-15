@@ -4,7 +4,6 @@ namespace Awcodes\Overlook;
 
 use Composer\InstalledVersions;
 use Filament\PluginServiceProvider;
-use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 
 class OverlookServiceProvider extends PluginServiceProvider
