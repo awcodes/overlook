@@ -20,7 +20,7 @@ class OverlookServiceProvider extends PluginServiceProvider
 
         $package
             ->name(static::$name)
-            ->hasTranslations()
+            ->hasConfigFile()
             ->hasViews(static::$viewNamespace);
     }
 
