@@ -15,6 +15,19 @@ You can install the package via composer:
 composer require awcodes/overlook
 ```
 
+Then add the widget to your dashboard class or the Filament config file.
+
+```php
+'widgets' => [
+    'namespace' => 'App\\Filament\\Widgets',
+    'path' => app_path('Filament/Widgets'),
+    'register' => [
+        \Awcodes\Overlook\Overlook::class,
+        ...
+    ],
+],
+```
+
 ## Usage
 
 By default, Overlook will display any resource registered with Filament, while still honoring the `canViewAny` policy. This can be undesired and also slow down the dashboard. To prevent this behavior publish the config file with:
