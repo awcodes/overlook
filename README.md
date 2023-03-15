@@ -15,10 +15,27 @@ You can install the package via composer:
 composer require awcodes/overlook
 ```
 
-Optionally, you can publish the views using
+## Usage
+
+By default, Overlook will display any resource registered with Filament, while still honoring the `canViewAny` policy. This can be undesired and also slow down the dashboard. To prevent this behavior publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="overlook-views"
+php artisan vendor:publish --tag="overlook-config"
+```
+
+Inside the config you will have options to either "include" or "exclude" resources from being displayed.
+
+```php
+return [
+    'includes' => [
+        App\Filament\Resources\Blog\AuthorResource::class,
+        App\Filament\Resources\Blog\CategoryResource::class,
+        App\Filament\Resources\Blog\PostResource::class,
+    ],
+    'excludes' => [
+//        App\Filament\Resources\Blog\AuthorResource::class,
+    ],
+];
 ```
 
 ## Changelog

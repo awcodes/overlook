@@ -3,6 +3,7 @@
 namespace Awcodes\Overlook;
 
 use Filament\Facades\Filament;
+use Filament\Resources\Resource;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Str;
 
@@ -14,19 +15,33 @@ class Overlook extends Widget
 
     public array $data = [];
 
-    private array $excludes = [];
+    protected array $excludes = [];
+
+    protected array $includes = [];
 
     public function mount(): void
     {
         $this->data = $this->getData();
     }
 
+    public function getIncludes(): array
+    {
+        return $this->includes = config('overlook.includes');
+    }
+
+    public function getExcludes(): array
+    {
+        return $this->excludes = config('overlook.excludes');
+    }
+
     public function getData(): array
     {
-        $rawResources = Filament::getResources();
+        $rawResources = filled($this->getIncludes())
+            ? $this->getIncludes()
+            : Filament::getResources();
 
         return collect($rawResources)->filter(function ($resource) {
-            return ! in_array(Str::of($resource)->afterLast('\\'), $this->excludes);
+            return ! in_array($resource, $this->getExcludes());
         })->transform(function ($resource) {
             $res = app($resource);
             $model = $res->getModel();
