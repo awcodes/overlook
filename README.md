@@ -5,7 +5,7 @@
 
 A Filament plugin that adds an app overview widget to your admin panel.
 
-![overlook-og](https://user-images.githubusercontent.com/3596800/225377392-34b90d2b-318a-485b-a19a-ffdd8daf9dee.png)
+![overlook-og](https://user-images.githubusercontent.com/3596800/225406836-83913580-5a1c-4ea9-96dc-2b5b2e00223f.png)
 
 ## Installation
 
