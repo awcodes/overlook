@@ -4,6 +4,7 @@ namespace Awcodes\Overlook;
 
 use Composer\InstalledVersions;
 use Filament\PluginServiceProvider;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 
 class OverlookServiceProvider extends PluginServiceProvider
@@ -29,5 +30,10 @@ class OverlookServiceProvider extends PluginServiceProvider
         return [
             'plugin-overlook-' . static::$version =>  __DIR__ . '/../resources/dist/overlook.css'
         ];
+    }
+
+    public function packageBooted(): void
+    {
+        Livewire::component('overlook-widget', Overlook::class);
     }
 }
