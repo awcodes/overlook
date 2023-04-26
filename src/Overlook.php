@@ -49,7 +49,7 @@ class Overlook extends Widget
             if ($res->canViewAny()) {
                 return [
                     'name' => ucfirst($res->getPluralModelLabel()),
-                    'count' => $model::count(),
+                    'count' => $res::getEloquentQuery()->count(),
                     'icon' => invade($res)->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
