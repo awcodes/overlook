@@ -44,7 +44,6 @@ class Overlook extends Widget
             return ! in_array($resource, $this->getExcludes());
         })->transform(function ($resource) {
             $res = app($resource);
-            $model = $res->getModel();
 
             if ($res->canViewAny()) {
                 return [
