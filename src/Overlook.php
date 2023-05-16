@@ -67,15 +67,21 @@ class Overlook extends Widget
         return number_format($number);
     }
 
-    public function convertCount($number): string
+    public function convertCount(string $number): string
     {
         if (config('overlook.should_convert_count')) {
-            return match(true) {
-                strlen($number) >= 10 => substr($number, 0, -9) . 'B',
-                strlen($number) >= 7 => substr($number, 0, -6) . 'M',
-                strlen($number) >= 4 => substr($number, 0, -3) . 'K',
-                default => $number
+            $formattedNum = match (true) {
+                strlen($number) >= 13 => bcdiv($number, '1000000000000', 1) . 'T',
+                strlen($number) >= 10 => bcdiv($number, '1000000000', 1) . 'B',
+                strlen($number) >= 7 => bcdiv($number, '1000000', 1) . 'M',
+                strlen($number) >= 4 => bcdiv($number, '1000', 1) . 'K',
+                default => $number,
             };
+
+            // Remove .0 from numbers like 1.0 as it's not needed for counts
+            $formattedNum = str_replace('.0', '', $formattedNum);
+
+            return $formattedNum;
         }
 
         return $number;
