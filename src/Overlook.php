@@ -62,7 +62,7 @@ class Overlook extends Widget
             ->toArray();
     }
 
-    public function formatRawCount($number): string
+    public function formatRawCount(string $number): string
     {
         return number_format($number);
     }
@@ -87,7 +87,7 @@ class Overlook extends Widget
         return $number;
     }
 
-    public function shouldShowTooltip($number): bool
+    public function shouldShowTooltip(string $number): bool
     {
         return strlen($number) >= 4 && config('overlook.should_convert_count') && config('overlook.enable_convert_tooltip');
     }
