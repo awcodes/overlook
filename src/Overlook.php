@@ -3,9 +3,7 @@
 namespace Awcodes\Overlook;
 
 use Filament\Facades\Filament;
-use Filament\Resources\Resource;
 use Filament\Widgets\Widget;
-use Illuminate\Support\Str;
 
 class Overlook extends Widget
 {
@@ -44,11 +42,13 @@ class Overlook extends Widget
             return ! in_array($resource, $this->getExcludes());
         })->transform(function ($resource) {
             $res = app($resource);
+            $rawCount = $res::getEloquentQuery()->count();
 
             if ($res->canViewAny()) {
                 return [
                     'name' => ucfirst($res->getPluralModelLabel()),
-                    'count' => $res::getEloquentQuery()->count(),
+                    'raw_count' => $this->formatRawCount($rawCount),
+                    'count' => $this->convertCount($rawCount),
                     'icon' => invade($res)->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
@@ -60,5 +60,29 @@ class Overlook extends Widget
             ->sortBy('name')
             ->values()
             ->toArray();
+    }
+
+    public function formatRawCount($number): string
+    {
+        return number_format($number);
+    }
+
+    public function convertCount($number): string
+    {
+        if (config('overlook.should_convert_count')) {
+            return match(true) {
+                strlen($number) >= 10 => substr($number, 0, -9) . 'B',
+                strlen($number) >= 7 => substr($number, 0, -6) . 'M',
+                strlen($number) >= 4 => substr($number, 0, -3) . 'K',
+                default => $number
+            };
+        }
+
+        return $number;
+    }
+
+    public function shouldShowTooltip($number): bool
+    {
+        return strlen($number) >= 4 && config('overlook.should_convert_count') && config('overlook.enable_convert_tooltip');
     }
 }
