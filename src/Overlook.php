@@ -70,18 +70,12 @@ class Overlook extends Widget
     public function convertCount(string $number): string
     {
         if (config('overlook.should_convert_count')) {
-            $formattedNum = match (true) {
-                strlen($number) >= 13 => bcdiv($number, '1000000000000', 1) . 'T',
-                strlen($number) >= 10 => bcdiv($number, '1000000000', 1) . 'B',
-                strlen($number) >= 7 => bcdiv($number, '1000000', 1) . 'M',
-                strlen($number) >= 4 => bcdiv($number, '1000', 1) . 'K',
-                default => $number,
-            };
+            $formatter = new \NumberFormatter(
+                app()->getLocale(),
+                \NumberFormatter::PADDING_POSITION,
+            );
 
-            // Remove .0 from numbers like 1.0 as it's not needed for counts
-            $formattedNum = str_replace('.0', '', $formattedNum);
-
-            return $formattedNum;
+            return $formatter->format($number);
         }
 
         return $number;
