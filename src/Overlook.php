@@ -71,7 +71,7 @@ class Overlook extends Widget
     {
         if (config('overlook.should_convert_count')) {
             $formatter = new \NumberFormatter(
-                'en_US',
+                app()->getLocale(),
                 \NumberFormatter::PADDING_POSITION,
             );
 
