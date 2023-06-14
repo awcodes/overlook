@@ -27,6 +27,10 @@ class OverlookServiceProvider extends PluginServiceProvider
 
     protected function getStyles(): array
     {
+        if (config('overlook.disable_css')) {
+            return [];
+        }
+
         return [
             'plugin-overlook-' . static::$version =>  __DIR__ . '/../resources/dist/overlook.css'
         ];
