@@ -42,6 +42,8 @@ You can also choose to convert the count to a human-readable format. For example
 
 Converted counts will also have a tooltip that displays the full count. This can be disabled by setting `enable_convert_tooltip` to false.
 
+You can also control the number of columns the grid will use at each breakpoint. You can set a breakpoint to null to disable it.
+
 ```php
 return [
     'includes' => [
@@ -50,10 +52,19 @@ return [
         App\Filament\Resources\Blog\PostResource::class,
     ],
     'excludes' => [
-//        App\Filament\Resources\Blog\AuthorResource::class,
+        // App\Filament\Resources\Blog\AuthorResource::class,
     ],
     'should_convert_count' => true,
     'enable_convert_tooltip' => true,
+    'grid' => [
+        'default' => 2,
+        'sm' => 2,
+        'md' => 3,
+        'lg' => 4,
+        'xl' => 5,
+        '2xl' => null,
+    ],
+    'disable_css' => false,
 ];
 ```
 
@@ -73,6 +84,24 @@ class CustomOverlookWidget extends Overlook
     protected static ?string $pollingInterval = '10s';
 }
 ```
+
+## Usage with a Custom Filament Theme
+
+In order to use your theme's colors you will need to disable the loading of the plugin's css file via the config and include the plugin's css file in your theme's css file and add the plugin views to your tailwind config.
+
+custom-theme.css
+```css
+@import '<path-to-vendor>/awcodes/overlook/resources/css/overlook.css';
+```
+
+tailwind.config.js
+```js
+content: [
+    ...
+    '<path-to-vendor>/awcodes/overlook/resources/views/**/*.blade.php',
+]
+```
+
 
 ## Changelog
 
