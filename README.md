@@ -44,6 +44,8 @@ Converted counts will also have a tooltip that displays the full count. This can
 
 You can also control the number of columns the grid will use at each breakpoint. You can set a breakpoint to null to disable it.
 
+All resources will be sorted alphabetically, should you choose to disable this, you can set `disable_sorting` to true. Doing so will honor the order of included resources or Filament's default order for registered resources.
+
 ```php
 return [
     'includes' => [
@@ -65,6 +67,7 @@ return [
         '2xl' => null,
     ],
     'disable_css' => false,
+    'disable_sorting' => false,
 ];
 ```
 
