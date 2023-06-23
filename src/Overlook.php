@@ -57,9 +57,7 @@ class Overlook extends Widget
             return null;
         })
             ->filter()
-            ->when(config('overlook.sort'), function ($collection) {
-                return $collection->sortBy('name');
-            })
+            ->sortBy('name')
             ->values()
             ->toArray();
     }

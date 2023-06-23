@@ -18,5 +18,4 @@ return [
         '2xl' => null,
     ],
     'disable_css' => false,
-    'sort' => false,
 ];
