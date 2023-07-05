@@ -1,18 +1,17 @@
-name: Build Assets
+name: "Build assets"
 
 on:
   pull_request:
-    branches: [2.x]
-    types: [closed]
-    
+    types:
+      - closed
+
 jobs:
-  npm-build:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          ref: 2.x
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -26,6 +25,4 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: 2.x
-          commit_message: >
-            Chore: build assets
+          commit_message: "Chore: build assets"
