@@ -3,6 +3,8 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 
+![overlook-og](https://github.com/awcodes/overlook/assets/3596800/d628e529-f787-46fe-a7ac-fafb2e42d140)
+
 A Filament plugin that adds an app overview widget to your admin panel.
 
 ## Installation
