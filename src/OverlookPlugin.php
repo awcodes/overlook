@@ -14,39 +14,29 @@ class OverlookPlugin implements Plugin
     use EvaluatesClosures;
     use HasColumns;
 
-    protected static string $name = 'overlook';
+    protected array | Closure | null $excludes = null;
 
-    protected bool $shouldLoadCss = true;
+    protected array | Closure | null $includes = null;
 
-    protected array|Closure|null $excludes = null;
+    protected bool | Closure | null $shouldAbbreviateCount = null;
 
-    protected array|Closure|null $includes = null;
+    protected bool | Closure | null $shouldShowTooltips = null;
 
-    protected bool|Closure|null $shouldAbbreviateCount = null;
+    protected int | Closure | null $shouldSortAlphabetical = null;
 
-    protected bool|Closure|null $shouldShowTooltips = null;
-
-    protected int|Closure|null $shouldSortAlphabetical = null;
-
-    protected int|Closure|null $sort = null;
+    protected int | Closure | null $sort = null;
 
     public function getId(): string
     {
-        return static::$name;
+        return 'awcodes/overlook';
     }
 
     public function register(Panel $panel): void
     {
-//        if (!$this->shouldDisableCss()) {
-//            FilamentAsset::register([
-//                Css::make(static::$name, __DIR__ . '/../resources/dist/' . static::$name . '.css'),
-//            ], static::$name);
-//        }
     }
 
     public function boot(Panel $panel): void
     {
-        //
     }
 
     public static function make(): static
@@ -56,17 +46,17 @@ class OverlookPlugin implements Plugin
 
     public static function get(): static
     {
-        return filament(static::$name);
+        return filament(app(static::class)->getId());
     }
 
-    public function alphabetical(bool|Closure|null $condition = true): static
+    public function alphabetical(bool | Closure | null $condition = true): static
     {
         $this->shouldSortAlphabetical = $condition;
 
         return $this;
     }
 
-    public function abbreviateCount(bool|Closure|null $condition = true): static
+    public function abbreviateCount(bool | Closure | null $condition = true): static
     {
         $this->shouldAbbreviateCount = $condition;
 
@@ -80,7 +70,7 @@ class OverlookPlugin implements Plugin
         return $this;
     }
 
-    public function excludes(array|Closure $resources): static
+    public function excludes(array | Closure $resources): static
     {
         $this->excludes = $resources;
 
@@ -118,7 +108,7 @@ class OverlookPlugin implements Plugin
         return $this->evaluate($this->sort) ?? -1;
     }
 
-    public function includes(array|Closure $resources): static
+    public function includes(array | Closure $resources): static
     {
         $this->includes = $resources;
 
@@ -128,11 +118,6 @@ class OverlookPlugin implements Plugin
     public function shouldAbbreviateCount(): bool
     {
         return $this->evaluate($this->shouldAbbreviateCount) ?? true;
-    }
-
-    public function shouldLoadCss(): bool
-    {
-        return $this->shouldLoadCss;
     }
 
     public function shouldShowTooltips(): bool
@@ -145,14 +130,14 @@ class OverlookPlugin implements Plugin
         return $this->evaluate($this->shouldSortAlphabetical) ?? false;
     }
 
-    public function sort(int|Closure $sort): static
+    public function sort(int | Closure $sort): static
     {
         $this->sort = $sort;
 
         return $this;
     }
 
-    public function tooltips(bool|Closure|null $condition = true): static
+    public function tooltips(bool | Closure | null $condition = true): static
     {
         $this->shouldShowTooltips = $condition;
 

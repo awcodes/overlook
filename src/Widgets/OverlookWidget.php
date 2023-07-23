@@ -97,6 +97,7 @@ class OverlookWidget extends Widget
     public function shouldShowTooltips(string $number): bool
     {
         $plugin = OverlookPlugin::get();
+
         return strlen($number) >= 4 && $plugin->shouldAbbreviateCount() && $plugin->shouldShowTooltips();
     }
 }

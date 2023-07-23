@@ -15,6 +15,19 @@ You can install the package via composer:
 composer require awcodes/overlook
 ```
 
+In an effort to align with Filament's theming methodology you will need to use a custom theme to use this plugin.
+
+> **Note**
+> If you have not set up a custom theme and are using a Panel follow the instructions in the [Filament Docs](https://filamentphp.com/docs/3.x/panels/themes#creating-a-custom-theme) first.
+
+Add the plugin's views to your `tailwind.config.js` file.
+
+```js
+content: [
+    '<path-to-vendor>/awcodes/overlook/resources/**/*.blade.php',
+]
+```
+
 ## Usage
 
 Add the plugin and widget to your panel provider. You may use the `sort` and `columns` methods on the plugin to change the widget order and number of columns the widget will use to display its items.
@@ -131,36 +144,6 @@ public function panel(Panel $panel): Panel
                 ->alphabetical(),
         ]);
 }      
-```
-
-## Custom Themes
-
-If you are using a custom theme with Filament you will want to disable loading the css file and add its styles to your custom theme.
-
-***You will also need to install tippy.js and include the styles for tippy.js if you have not already done so.***
-
-```bash
-npm i -D tippy.js
-```
-
-```php
-use Awcodes\Overlook\OverlookPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        ->plugins([
-            OverlookPlugin::make()
-                ->disableCss(),
-        ]);
-}      
-```
-
-In your theme's stylesheet add the following:
-
-```css
-@import '<path-to-vendor>/awcodes/overlook/resources/dist/overlook.css';
-@import '<path-to-node-modules>/tippy.js/dist/tippy.css';
 ```
 
 ## Changelog

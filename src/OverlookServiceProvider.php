@@ -2,8 +2,6 @@
 
 namespace Awcodes\Overlook;
 
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -17,16 +15,8 @@ class OverlookServiceProvider extends PackageServiceProvider
             ->hasViews();
     }
 
-    public function boot(): void
+    public function packageBooted(): void
     {
-        parent::boot();
-
         Livewire::component('overlook-widget', Widgets\OverlookWidget::class);
-
-        if (app()->runningInConsole()) {
-            FilamentAsset::register([
-                Css::make('overlook', __DIR__ . '/../resources/dist/overlook.css')
-            ], 'awcodes/overlook');
-        }
     }
 }
