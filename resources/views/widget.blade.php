@@ -9,7 +9,7 @@
     >
         @foreach ($data as $resource)
             <x-filament::grid.column>
-                <x-filament::card
+                <x-filament::section
                     class="overlook-card rounded-xl overflow-hidden relative h-24 bg-gradient-to-tr from-gray-100 via-white to-white dark:from-gray-950 dark:to-gray-900"
                 >
                     <a
@@ -29,7 +29,7 @@
                         <span class="overlook-name">{{ $resource['name'] }}</span>
                         <span class="overlook-count text-gray-600 dark:text-gray-300 absolute leading-none bottom-3 right-4 text-3xl font-bold">{{ $resource['count'] }}</span>
                     </a>
-                </x-filament::card>
+                </x-filament::section>
             </x-filament::grid.column>
         @endforeach
     </x-filament::grid>
