@@ -7,6 +7,8 @@
 
 A Filament plugin that adds an app overview widget to your admin panel.
 
+<!-- docs_start -->
+
 ## Installation
 
 You can install the package via composer:
@@ -145,6 +147,7 @@ public function panel(Panel $panel): Panel
         ]);
 }      
 ```
+<!-- docs_end -->
 
 ## Changelog
 
