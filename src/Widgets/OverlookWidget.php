@@ -2,6 +2,7 @@
 
 namespace Awcodes\Overlook\Widgets;
 
+use Awcodes\Overlook\Contracts\CustomizesOverlookWidgetQuery;
 use Awcodes\Overlook\OverlookPlugin;
 use Exception;
 use Filament\Widgets\Widget;
@@ -69,7 +70,18 @@ class OverlookWidget extends Widget
             return ! in_array($resource, $plugin->getExcludes());
         })->transform(function ($resource) {
             $res = app($resource);
-            $rawCount = $res->getEloquentQuery()->count();
+
+            $query = $res->getEloquentQuery();
+            
+            if ($res instanceof CustomizesOverlookWidgetQuery) {
+                if (method_exists($res, 'getOverlookWidgetQuery')) {
+                    $rawCount = $res->getOverlookWidgetQuery($query)->count();
+                } else {
+                    throw new Exception('The resource must implement the CustomizesOverlookWidgetQuery interface and the getOverlookWidgetQuery method.');
+                }
+            } else {
+                $rawCount = $res->getEloquentQuery()->count();
+            }
 
             if ($res->canViewAny()) {
                 return [

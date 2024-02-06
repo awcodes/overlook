@@ -147,6 +147,20 @@ public function panel(Panel $panel): Panel
         ]);
 }      
 ```
+
+## Customizing the resource query
+
+By default, the overlook widget uses the `getEloquentQuery()` method of the Filament Resource, but you can customize the query by implementing the `CustomizesOverlookWidgetQuery` interface on the Filament Resource. This interface requires the implementation of the `getOverlookWidgetQuery()` method that can be used to customize the Filament Resource query.
+
+```php
+use Awcodes\Overlook\Contracts\CustomizesOverlookWidgetQuery;
+
+public static function getOverlookWidgetQuery(Builder $query): Builder
+{
+    return $query->where('status','=','PENDING');
+}
+```
+
 <!-- docs_end -->
 
 ## Changelog
