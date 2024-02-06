@@ -2,7 +2,7 @@
 
 namespace Awcodes\Overlook\Widgets;
 
-use Awcodes\Overlook\Contracts\CustomizesOverlookWidgetQuery;
+use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
 use Awcodes\Overlook\OverlookPlugin;
 use Exception;
 use Filament\Widgets\Widget;
@@ -71,21 +71,19 @@ class OverlookWidget extends Widget
         })->transform(function ($resource) {
             $res = app($resource);
 
-            $query = $res->getEloquentQuery();
-            
-            if ($res instanceof CustomizesOverlookWidgetQuery) {
-                if (method_exists($res, 'getOverlookWidgetQuery')) {
-                    $rawCount = $res->getOverlookWidgetQuery($query)->count();
-                } else {
-                    throw new Exception('The resource must implement the CustomizesOverlookWidgetQuery interface and the getOverlookWidgetQuery method.');
-                }
+            $widgetQuery = $res->getEloquentQuery();
+
+            if ($res instanceof CustomizeOverlookWidget) {
+                $rawCount = $res->getOverlookWidgetQuery($widgetQuery)->count();
+                $title = $res->getOverlookWidgetTitle();
             } else {
-                $rawCount = $res->getEloquentQuery()->count();
+                $rawCount = $widgetQuery->count();
+                $title = ucfirst($res->getPluralModelLabel());
             }
 
             if ($res->canViewAny()) {
                 return [
-                    'name' => ucfirst($res->getPluralModelLabel()),
+                    'name' => $title,
                     'raw_count' => $this->formatRawcount($rawCount),
                     'count' => $this->convertCount($rawCount),
                     'icon' => $res->getNavigationIcon(),
