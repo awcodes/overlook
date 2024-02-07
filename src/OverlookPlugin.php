@@ -63,13 +63,6 @@ class OverlookPlugin implements Plugin
         return $this;
     }
 
-    public function disableCss(): static
-    {
-        $this->shouldLoadCss = false;
-
-        return $this;
-    }
-
     public function excludes(array | Closure $resources): static
     {
         $this->excludes = $resources;
