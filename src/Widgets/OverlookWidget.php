@@ -16,9 +16,9 @@ class OverlookWidget extends Widget
 
     public array $data = [];
 
-    protected array $excludes = [];
+    public array $excludes = [];
 
-    protected array $includes = [];
+    public array $includes = [];
 
     public array $grid = [];
 
@@ -28,7 +28,10 @@ class OverlookWidget extends Widget
     public function mount(): void
     {
         $this->data = $this->getData();
-        $this->grid = OverlookPlugin::get()->getColumns();
+
+        if (empty($this->grid)) {
+            $this->grid = OverlookPlugin::get()->getColumns();
+        }
     }
 
     public function convertCount(string $number): string
@@ -36,18 +39,13 @@ class OverlookWidget extends Widget
         if (OverlookPlugin::get()->shouldAbbreviateCount()) {
             $formatter = new NumberFormatter(
                 app()->getLocale(),
-                NumberFormatter::PADDING_POSITION,
+                NumberFormatter::PATTERN_DECIMAL,
             );
 
             return $formatter->format($number);
         }
 
         return $number;
-    }
-
-    public function shouldLoadCss(): bool
-    {
-        return OverlookPlugin::get()->shouldLoadCss();
     }
 
     public function formatRawCount(string $number): string
@@ -61,13 +59,15 @@ class OverlookWidget extends Widget
     public function getData(): array
     {
         $plugin = OverlookPlugin::get();
+        $includes = $this->includes ?? $plugin->getIncludes();
+        $excludes = $this->excludes ?? $plugin->getExcludes();
 
-        $rawResources = filled($plugin->getIncludes())
-            ? $plugin->getIncludes()
+        $rawResources = filled($includes)
+            ? $includes
             : filament()->getCurrentPanel()->getResources();
 
-        return collect($rawResources)->filter(function ($resource) use ($plugin) {
-            return ! in_array($resource, $plugin->getExcludes());
+        return collect($rawResources)->filter(function ($resource) use ($excludes) {
+            return ! in_array($resource, $excludes);
         })->transform(function ($resource) {
             $res = app($resource);
 
