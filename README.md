@@ -147,6 +147,46 @@ public function panel(Panel $panel): Panel
         ]);
 }      
 ```
+
+## Customizing the Widget
+
+By default, the overlook widget uses the `getEloquentQuery()` method of the Filament Resource, but you can customize the query by implementing the `CustomizeOverlookWidget` interface on the Filament Resource. The trait `HandlesOverlookWidgetCustomization` predefines existing customization that can be overriden on the resource class.
+
+```php
+use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
+use Awcodes\Overlook\Concerns\HandlesOverlookWidgetCustomization;
+
+class UserResource extends Resource implements CustomizeOverlookWidget
+{
+    use HandlesOverlookWidgetCustomization;
+}
+```
+
+### Customize Widget Query
+
+Override the `getOverlookWidgetQuery()` method to customize the query for the Overlook Widget. This method takes in the existing eloquent query as a parameter that can be used to make further customization.
+
+```php
+use Illuminate\Database\Eloquent\Builder;
+
+public static function getOverlookWidgetQuery(Builder $query): Builder
+{
+    return $query->where('status','=','PENDING');
+}
+```
+
+### Customize Widget Title
+
+Override the `getOverlookWidgetTitle()` method to customize the title of the widget
+
+```php
+public static function getOverlookWidgetTitle(): string
+{
+    return 'Pending Users';
+}
+```
+
+
 <!-- docs_end -->
 
 ## Changelog
