@@ -86,7 +86,7 @@ class OverlookWidget extends Widget
                     'name' => $title,
                     'raw_count' => $this->formatRawcount($rawCount),
                     'count' => $this->convertCount($rawCount),
-                    'icon' => $res->getNavigationIcon(),
+                    'icon' => $plugin->icon() ?? $res->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
             }
