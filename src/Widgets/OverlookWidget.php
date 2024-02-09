@@ -59,8 +59,8 @@ class OverlookWidget extends Widget
     public function getData(): array
     {
         $plugin = OverlookPlugin::get();
-        $includes = $this->includes ?? $plugin->getIncludes();
-        $excludes = $this->excludes ?? $plugin->getExcludes();
+        $includes = filled($this->includes) ? $this->includes : $plugin->getIncludes();
+        $excludes = filled($this->excludes) ? $this->excludes : $plugin->getExcludes();
 
         $rawResources = filled($includes)
             ? $includes
