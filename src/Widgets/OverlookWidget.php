@@ -22,6 +22,8 @@ class OverlookWidget extends Widget
 
     public array $grid = [];
 
+    public array $icons = [];
+
     /**
      * @throws Exception
      */
@@ -61,6 +63,7 @@ class OverlookWidget extends Widget
         $plugin = OverlookPlugin::get();
         $includes = filled($this->includes) ? $this->includes : $plugin->getIncludes();
         $excludes = filled($this->excludes) ? $this->excludes : $plugin->getExcludes();
+        $icons = filled($this->icons) ? $this->icons : $plugin->getIcons();
 
         $rawResources = filled($includes)
             ? $includes
@@ -70,15 +73,10 @@ class OverlookWidget extends Widget
             return ! in_array($resource, $excludes);
         })->transform(function ($resource) {
             
-            //CHECK IF ICON WAS PASSED
-            if (is_array($resource) && array_key_exists('icon',$resource)) {
-                $icon = $resource['icon'];
-                $res = app($resource['resource']);
-            }
-            else {
-                $res = app($resource);
-            }
-
+            $customIcon = array_search($resource, $icons);
+            
+            $res = app($resource);
+            
             $widgetQuery = $res->getEloquentQuery();
 
             if ($res instanceof CustomizeOverlookWidget) {
@@ -94,7 +92,7 @@ class OverlookWidget extends Widget
                     'name' => $title,
                     'raw_count' => $this->formatRawcount($rawCount),
                     'count' => $this->convertCount($rawCount),
-                    'icon' => $icon ?? $res->getNavigationIcon(),
+                    'icon' => $customIcon ?? $res->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
             }

@@ -26,6 +26,8 @@ class OverlookPlugin implements Plugin
 
     protected int | Closure | null $sort = null;
 
+    protected array | Closure | null $icons = null;
+
     public function getId(): string
     {
         return 'awcodes/overlook';
@@ -135,5 +137,17 @@ class OverlookPlugin implements Plugin
         $this->shouldShowTooltips = $condition;
 
         return $this;
+    }
+
+    public function icons(array | Closure | null $icons): static
+    {
+        $this->icons = $icons;
+
+        return $this;
+    }
+
+    public function getIcons(): array
+    {
+        return $this->evaluate($this->icons) ?? [];
     }
 }
