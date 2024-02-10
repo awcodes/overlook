@@ -69,7 +69,15 @@ class OverlookWidget extends Widget
         return collect($rawResources)->filter(function ($resource) use ($excludes) {
             return ! in_array($resource, $excludes);
         })->transform(function ($resource) {
-            $res = app($resource);
+            
+            //CHECK IF ICON WAS PASSED
+            if (is_array($resource) && array_key_exists('icon',$resource)) {
+                $icon = $resource['icon'];
+                $res = app($resource['resource']);
+            }
+            else {
+                $res = app($resource);
+            }
 
             $widgetQuery = $res->getEloquentQuery();
 
@@ -86,7 +94,7 @@ class OverlookWidget extends Widget
                     'name' => $title,
                     'raw_count' => $this->formatRawcount($rawCount),
                     'count' => $this->convertCount($rawCount),
-                    'icon' => $plugin->icon() ?? $res->getNavigationIcon(),
+                    'icon' => $icon ?? $res->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
             }
