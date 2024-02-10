@@ -24,6 +24,8 @@ class OverlookPlugin implements Plugin
 
     protected int | Closure | null $shouldSortAlphabetical = null;
 
+    protected string | Closure | null $icon = null;
+
     protected int | Closure | null $sort = null;
 
     public function getId(): string
@@ -133,6 +135,13 @@ class OverlookPlugin implements Plugin
     public function tooltips(bool | Closure | null $condition = true): static
     {
         $this->shouldShowTooltips = $condition;
+
+        return $this;
+    }
+
+        public function icon(string | Closure $icon): static
+    {
+        $this->icon = $icon;
 
         return $this;
     }
