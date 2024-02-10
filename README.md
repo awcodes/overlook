@@ -186,6 +186,31 @@ public static function getOverlookWidgetTitle(): string
 }
 ```
 
+### Customize Widget Icon
+
+By default, the icon will be loaded from the resource but you can change it by passing an `key => value` array to the `includes` method on the plugin. If your resource already has an icon configured, you can still just add the class in the array.
+
+```php
+use Awcodes\Overlook\OverlookPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->includes([
+                        ['icon' => 'heroicon-o-heart',
+                         'resource' => BlogPostResource::class,
+                        ],
+                        ['icon' => 'heroicon-o-user',
+                         'resource' => UserResource::class,
+                        ],
+                        UserResource::class,
+                ),
+        ]);
+}      
+```
+
 
 <!-- docs_end -->
 
