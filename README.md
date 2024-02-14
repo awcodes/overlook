@@ -188,7 +188,7 @@ public static function getOverlookWidgetTitle(): string
 
 ### Customize Widget Icon
 
-By default, the icon will be loaded from the resource but you can override it by passing using the `icons` method in the plugin.
+By default, the icon will be loaded from the resource but you can override it by passing using the `icons` modifier on the plugin and passing it an array of icon names and resource names.
 
 ```php
 use Awcodes\Overlook\OverlookPlugin;
