@@ -71,7 +71,7 @@ class OverlookWidget extends Widget
 
         return collect($rawResources)->filter(function ($resource) use ($excludes) {
             return ! in_array($resource, $excludes);
-        })->transform(function ($resource) {
+        })->transform(function ($resource) use ($icons) {
             
             $customIcon = array_search($resource, $icons);
             
@@ -92,7 +92,7 @@ class OverlookWidget extends Widget
                     'name' => $title,
                     'raw_count' => $this->formatRawcount($rawCount),
                     'count' => $this->convertCount($rawCount),
-                    'icon' => $customIcon ?? $res->getNavigationIcon(),
+                    'icon' => $customIcon ?: $res->getNavigationIcon(),
                     'url' => $res->getUrl('index'),
                 ];
             }
