@@ -72,11 +72,11 @@ class OverlookWidget extends Widget
         return collect($rawResources)->filter(function ($resource) use ($excludes) {
             return ! in_array($resource, $excludes);
         })->transform(function ($resource) use ($icons) {
-            
+
             $customIcon = array_search($resource, $icons);
-            
+
             $res = app($resource);
-            
+
             $widgetQuery = $res->getEloquentQuery();
 
             if ($res instanceof CustomizeOverlookWidget) {
