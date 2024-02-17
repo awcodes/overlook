@@ -186,6 +186,26 @@ public static function getOverlookWidgetTitle(): string
 }
 ```
 
+### Customize Widget Icon
+
+By default, the icon will be loaded from the resource but you can override it by passing using the `icons` modifier on the plugin and passing it an array of icon names and resource names.
+
+```php
+use Awcodes\Overlook\OverlookPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->icons([
+                    'heroicon-o-heart' => \App\Filament\Resources\Shop\ProductResource::class,
+                    'heroicon-o-newspaper' => \App\Filament\Resources\Shop\OrderResource::class,
+                ]),
+        ]);
+}      
+```
+
 
 <!-- docs_end -->
 
