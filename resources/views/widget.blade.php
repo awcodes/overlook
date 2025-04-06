@@ -23,11 +23,11 @@
                             <x-filament::icon
                                 :icon="$resource['icon']"
                                 :size="24"
-                                class="overlook-icon w-auto h-24 absolute left-0 top-8 text-primary-500 opacity-20 dark:opacity-20 transition group-hover:scale-110 group-hover:-rotate-12 group-hover:opacity-40 dark:group-hover:opacity-80"
+                                class="overlook-icon w-auto h-24 absolute start-0 top-8 text-primary-500 opacity-20 dark:opacity-20 transition group-hover:scale-110 group-hover:-rotate-12 rtl:group-hover:rotate-12 group-hover:opacity-40 dark:group-hover:opacity-80"
                             />
                         @endif
                         <span class="overlook-name">{{ $resource['name'] }}</span>
-                        <span class="overlook-count text-gray-600 dark:text-gray-300 absolute leading-none bottom-3 right-4 text-3xl font-bold">{{ $resource['count'] }}</span>
+                        <span class="overlook-count text-gray-600 dark:text-gray-300 absolute leading-none bottom-3 end-4 text-3xl font-bold">{{ $resource['count'] }}</span>
                     </a>
                 </x-filament::section>
             </x-filament::grid.column>
