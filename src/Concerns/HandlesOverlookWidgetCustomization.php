@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Awcodes\Overlook\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;

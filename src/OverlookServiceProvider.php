@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Awcodes\Overlook;
 
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class OverlookServiceProvider extends PackageServiceProvider
+final class OverlookServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
