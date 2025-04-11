@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Awcodes\Overlook\Widgets;
 
 use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
@@ -8,12 +10,8 @@ use Exception;
 use Filament\Widgets\Widget;
 use NumberFormatter;
 
-class OverlookWidget extends Widget
+final class OverlookWidget extends Widget
 {
-    protected static string $view = 'overlook::widget';
-
-    protected int | string | array $columnSpan = 'full';
-
     public array $data = [];
 
     public array $excludes = [];
@@ -23,6 +21,15 @@ class OverlookWidget extends Widget
     public array $grid = [];
 
     public array $icons = [];
+
+    protected static string $view = 'overlook::widget';
+
+    protected int|string|array $columnSpan = 'full';
+
+    public static function getSort(): int
+    {
+        return OverlookPlugin::get()->getSort();
+    }
 
     /**
      * @throws Exception
@@ -36,7 +43,7 @@ class OverlookWidget extends Widget
         }
     }
 
-    public function convertCount(string $number): string
+    public function convertCount(string | int | float $number): string
     {
         if (OverlookPlugin::get()->shouldAbbreviateCount()) {
             $formatter = new NumberFormatter(
@@ -44,15 +51,15 @@ class OverlookWidget extends Widget
                 NumberFormatter::PATTERN_DECIMAL,
             );
 
-            return $formatter->format($number);
+            return $formatter->format((int) $number);
         }
 
         return $number;
     }
 
-    public function formatRawCount(string $number): string
+    public function formatRawCount(string | int | float $number): string
     {
-        return number_format($number);
+        return number_format((int) $number);
     }
 
     /**
@@ -105,15 +112,10 @@ class OverlookWidget extends Widget
             ->toArray();
     }
 
-    public static function getSort(): int
-    {
-        return OverlookPlugin::get()->getSort();
-    }
-
     public function shouldShowTooltips(string $number): bool
     {
         $plugin = OverlookPlugin::get();
 
-        return strlen($number) >= 4 && $plugin->shouldAbbreviateCount() && $plugin->shouldShowTooltips();
+        return mb_strlen($number) >= 4 && $plugin->shouldAbbreviateCount() && $plugin->shouldShowTooltips();
     }
 }
