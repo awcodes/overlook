@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Awcodes\Overlook;
 
 use Closure;
@@ -11,26 +9,26 @@ use Filament\Forms\Concerns\HasColumns;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
-final class OverlookPlugin implements Plugin
+class OverlookPlugin implements Plugin
 {
     use EvaluatesClosures;
     use HasColumns;
 
-    protected array|Closure|null $excludes = null;
+    protected array | Closure | null $excludes = null;
 
-    protected array|Closure|null $includes = null;
+    protected array | Closure | null $includes = null;
 
-    protected bool|Closure|null $shouldAbbreviateCount = null;
+    protected bool | Closure | null $shouldAbbreviateCount = null;
 
-    protected bool|Closure|null $shouldShowTooltips = null;
+    protected bool | Closure | null $shouldShowTooltips = null;
 
-    protected int|Closure|null $shouldSortAlphabetical = null;
+    protected bool | Closure | null $shouldSortAlphabetical = null;
 
-    protected int|Closure|null $sort = null;
+    protected int | Closure | null $sort = null;
 
-    protected array|Closure|null $icons = null;
+    protected array | Closure | null $icons = null;
 
-    public static function make(): static
+    public static function make(): OverlookPlugin
     {
         return app(self::class);
     }
@@ -49,21 +47,21 @@ final class OverlookPlugin implements Plugin
 
     public function boot(Panel $panel): void {}
 
-    public function alphabetical(bool|Closure|null $condition = true): static
+    public function alphabetical(bool | Closure | null $condition = true): static
     {
         $this->shouldSortAlphabetical = $condition;
 
         return $this;
     }
 
-    public function abbreviateCount(bool|Closure|null $condition = true): static
+    public function abbreviateCount(bool | Closure | null $condition = true): static
     {
         $this->shouldAbbreviateCount = $condition;
 
         return $this;
     }
 
-    public function excludes(array|Closure $resources): static
+    public function excludes(array | Closure $resources): static
     {
         $this->excludes = $resources;
 
@@ -101,7 +99,7 @@ final class OverlookPlugin implements Plugin
         return $this->evaluate($this->sort) ?? -1;
     }
 
-    public function includes(array|Closure $resources): static
+    public function includes(array | Closure $resources): static
     {
         $this->includes = $resources;
 
@@ -123,21 +121,21 @@ final class OverlookPlugin implements Plugin
         return $this->evaluate($this->shouldSortAlphabetical) ?? false;
     }
 
-    public function sort(int|Closure $sort): static
+    public function sort(int | Closure $sort): static
     {
         $this->sort = $sort;
 
         return $this;
     }
 
-    public function tooltips(bool|Closure|null $condition = true): static
+    public function tooltips(bool | Closure | null $condition = true): static
     {
         $this->shouldShowTooltips = $condition;
 
         return $this;
     }
 
-    public function icons(array|Closure|null $icons): static
+    public function icons(array | Closure | null $icons): static
     {
         $this->icons = $icons;
 
