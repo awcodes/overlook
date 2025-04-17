@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Awcodes\Overlook\Widgets;
 
 use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
@@ -10,7 +8,7 @@ use Exception;
 use Filament\Widgets\Widget;
 use NumberFormatter;
 
-final class OverlookWidget extends Widget
+class OverlookWidget extends Widget
 {
     public array $data = [];
 
@@ -24,7 +22,7 @@ final class OverlookWidget extends Widget
 
     protected static string $view = 'overlook::widget';
 
-    protected int|string|array $columnSpan = 'full';
+    protected int | string | array $columnSpan = 'full';
 
     public static function getSort(): int
     {
