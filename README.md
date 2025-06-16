@@ -1,13 +1,18 @@
-# Overlook for Filament
-
+![overlook-og](https://res.cloudinary.com/aw-codes/image/upload/w_1200,f_auto,q_auto/plugins/overlook/awcodes-overlook.jpg)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
 
-![overlook-og](https://res.cloudinary.com/aw-codes/image/upload/w_1200,f_auto,q_auto/plugins/overlook/awcodes-overlook.jpg)
+# Overlook for Filament
 
 A Filament plugin that adds an app overview widget to your admin panel.
 
-<!-- docs_start -->
+## Compatibility
+
+| Package Version | Filament Version |
+|-----------------|------------------|
+| 1.x             | 2.x              |
+| 2.x             | 3.x              |
+| 3.x             | 4.x              |
 
 ## Installation
 
@@ -17,17 +22,13 @@ You can install the package via composer:
 composer require awcodes/overlook
 ```
 
-In an effort to align with Filament's theming methodology you will need to use a custom theme to use this plugin.
+> [!IMPORTANT]
+> If you have not set up a custom theme and are using Filament Panels follow the instructions in the [Filament Docs](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) first.
 
-> **Note**
-> If you have not set up a custom theme and are using a Panel follow the instructions in the [Filament Docs](https://filamentphp.com/docs/3.x/panels/themes#creating-a-custom-theme) first.
+After setting up a custom theme add the plugin's views to your theme css file.
 
-Add the plugin's views to your `tailwind.config.js` file.
-
-```js
-content: [
-    '<path-to-vendor>/awcodes/overlook/resources/**/*.blade.php',
-]
+```css
+@source '../../../../vendor/awcodes/outlook/resources/**/*.blade.php';
 ```
 
 ## Usage
@@ -205,9 +206,6 @@ public function panel(Panel $panel): Panel
         ]);
 }      
 ```
-
-
-<!-- docs_end -->
 
 ## Changelog
 

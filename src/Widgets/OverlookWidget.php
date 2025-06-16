@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Awcodes\Overlook\Widgets;
 
 use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
 use Awcodes\Overlook\OverlookPlugin;
 use Exception;
 use Filament\Widgets\Widget;
-use NumberFormatter;
+use Illuminate\Support\Number;
 
 class OverlookWidget extends Widget
 {
@@ -20,9 +22,9 @@ class OverlookWidget extends Widget
 
     public array $icons = [];
 
-    protected static string $view = 'overlook::widget';
+    protected string $view = 'overlook::widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public static function getSort(): int
     {
@@ -36,26 +38,21 @@ class OverlookWidget extends Widget
     {
         $this->data = $this->getData();
 
-        if (empty($this->grid)) {
+        if ($this->grid === []) {
             $this->grid = OverlookPlugin::get()->getColumns();
         }
     }
 
-    public function convertCount(string | int | float $number): string
+    public function convertCount(string|int|float $number): string
     {
         if (OverlookPlugin::get()->shouldAbbreviateCount()) {
-            $formatter = new NumberFormatter(
-                app()->getLocale(),
-                NumberFormatter::PATTERN_DECIMAL,
-            );
-
-            return $formatter->format((int) $number);
+            return Number::abbreviate((int) $number);
         }
 
         return $number;
     }
 
-    public function formatRawCount(string | int | float $number): string
+    public function formatRawCount(string|int|float $number): string
     {
         return number_format((int) $number);
     }
@@ -72,11 +69,9 @@ class OverlookWidget extends Widget
 
         $rawResources = filled($includes)
             ? $includes
-            : filament()->getCurrentPanel()->getResources();
+            : filament()->getCurrentOrDefaultPanel()->getResources();
 
-        return collect($rawResources)->filter(function ($resource) use ($excludes) {
-            return ! in_array($resource, $excludes);
-        })->transform(function ($resource) use ($icons) {
+        return collect($rawResources)->filter(fn ($resource): bool => ! in_array($resource, $excludes))->transform(function ($resource) use ($icons): ?array {
 
             $customIcon = array_search($resource, $icons);
 
@@ -89,7 +84,7 @@ class OverlookWidget extends Widget
                 $title = $res->getOverlookWidgetTitle();
             } else {
                 $rawCount = $widgetQuery->count();
-                $title = ucfirst($res->getPluralModelLabel());
+                $title = ucfirst((string) $res->getPluralModelLabel());
             }
 
             if ($res->canViewAny()) {

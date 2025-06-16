@@ -4,7 +4,9 @@
     "keywords": [
         "awcodes",
         "laravel",
-        "overlook"
+        "filament",
+        "overlook",
+        "plugin"
     ],
     "homepage": "https://github.com/awcodes/overlook",
     "support": {
@@ -20,13 +22,18 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-intl": "*",
-        "filament/filament": "^3.0",
+        "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-livewire": "^3.0",
+        "rector/rector": "^2.0",
         "spatie/laravel-ray": "^1.26"
     },
     "autoload": {
@@ -34,8 +41,23 @@
             "Awcodes\\Overlook\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Awcodes\\Overlook\\Tests\\": "tests/src",
+            "Awcodes\\Overlook\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
     "scripts": {
-        "pint": "vendor/bin/pint"
+        "lint": "pint",
+        "refactor": "rector",
+        "test:lint": "pint --test",
+        "test:refactor": "rector --dry-run",
+        "test:unit": "pest",
+        "test": [
+            "@test:refactor",
+            "@test:lint",
+            "@test:unit"
+        ]
     },
     "config": {
         "sort-packages": true,
