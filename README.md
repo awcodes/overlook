@@ -28,7 +28,7 @@ composer require awcodes/overlook
 After setting up a custom theme add the plugin's views to your theme css file.
 
 ```css
-@source '../../../../vendor/awcodes/outlook/resources/**/*.blade.php';
+@source '../../../../vendor/awcodes/overlook/resources/**/*.blade.php';
 ```
 
 ## Usage
