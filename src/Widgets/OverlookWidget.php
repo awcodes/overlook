@@ -49,7 +49,7 @@ class OverlookWidget extends Widget
             return Number::abbreviate((int) $number);
         }
 
-        return $number;
+        return $this->formatRawCount($number);
     }
 
     public function formatRawCount(string|int|float $number): string
