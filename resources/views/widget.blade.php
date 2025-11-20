@@ -23,7 +23,7 @@
                             <x-filament::icon
                                 :icon="$resource['icon']"
                                 :size="\Filament\Support\Enums\IconSize::ExtraLarge"
-                                class="overlook-icon w-auto h-24 absolute start-0 top-8 text-primary-500 opacity-20 dark:opacity-20 transition group-hover:scale-110 group-hover:-rotate-12 rtl:group-hover:rotate-12 group-hover:opacity-40 dark:group-hover:opacity-80"
+                                class="overlook-icon w-auto h-24 max-w-none max-h-none absolute start-0 top-8 text-primary-500 opacity-20 dark:opacity-20 transition group-hover:scale-110 group-hover:-rotate-12 rtl:group-hover:rotate-12 group-hover:opacity-40 dark:group-hover:opacity-80"
                             />
                         @endif
                         <span class="overlook-name">{{ $resource['name'] }}</span>
