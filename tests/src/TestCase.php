@@ -19,6 +19,7 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Schema;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -34,6 +35,15 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->actingAs(User::factory()->create());
+    }
+
+    protected function afterRefreshingDatabase(): void
+    {
+        if (! Schema::hasColumn('users', 'deleted_at')) {
+            Schema::table('users', function ($table) {
+                $table->softDeletes();
+            });
+        }
     }
 
     protected function getPackageProviders($app): array

@@ -29,6 +29,8 @@ class OverlookPlugin implements Plugin
 
     protected array|Closure|null $icons = null;
 
+    protected bool|Closure|null $withoutTrashed = null;
+
     public static function make(): self
     {
         return app(self::class);
@@ -142,5 +144,17 @@ class OverlookPlugin implements Plugin
     public function getIcons(): array
     {
         return $this->evaluate($this->icons) ?? [];
+    }
+
+    public function withoutTrashed(bool|Closure|null $condition = true): static
+    {
+        $this->withoutTrashed = $condition;
+
+        return $this;
+    }
+
+    public function shouldExcludeTrashed(): bool
+    {
+        return $this->evaluate($this->withoutTrashed) ?? false;
     }
 }

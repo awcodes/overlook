@@ -170,3 +170,18 @@ it('sets includes with closure', function () {
     expect(Filament::getPlugin('awcodes/overlook')->getIncludes())
         ->toContain('Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource');
 });
+
+it('sets withoutTrashed', function (bool|Closure|null $condition) {
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()->withoutTrashed($condition),
+        ]);
+
+    expect(Filament::getPlugin('awcodes/overlook')->shouldExcludeTrashed())
+        ->toBe($condition);
+})->with([
+    true,
+    fn () => true,
+    false,
+    fn () => false,
+]);

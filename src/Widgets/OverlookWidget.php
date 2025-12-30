@@ -8,6 +8,7 @@ use Awcodes\Overlook\Contracts\CustomizeOverlookWidget;
 use Awcodes\Overlook\OverlookPlugin;
 use Exception;
 use Filament\Widgets\Widget;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Number;
 
 class OverlookWidget extends Widget
@@ -71,13 +72,17 @@ class OverlookWidget extends Widget
             ? $includes
             : filament()->getCurrentOrDefaultPanel()->getResources();
 
-        return collect($rawResources)->filter(fn ($resource): bool => ! in_array($resource, $excludes))->transform(function ($resource) use ($icons): ?array {
+        return collect($rawResources)->filter(fn ($resource): bool => ! in_array($resource, $excludes))->transform(function ($resource) use ($plugin, $icons): ?array {
 
             $customIcon = array_search($resource, $icons);
 
             $res = app($resource);
 
             $widgetQuery = $res->getEloquentQuery();
+
+            if ($plugin->shouldExcludeTrashed() && in_array(SoftDeletes::class, class_uses_recursive($widgetQuery->getModel()))) {
+                $widgetQuery = $widgetQuery->withoutTrashed();
+            }
 
             if ($res instanceof CustomizeOverlookWidget) {
                 $rawCount = $res->getOverlookWidgetQuery($widgetQuery)->count();
