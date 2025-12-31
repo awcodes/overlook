@@ -83,3 +83,50 @@ it('can be customized', function () {
                 && $data[0]['name'] === 'Unverified Users';
         });
 });
+
+it('excludes soft deleted records when withoutTrashed is enabled', function () {
+    // setUp creates 1 user for authentication
+    User::factory()->count(3)->create();
+    User::factory()->count(2)->create(['deleted_at' => now()]);
+
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->withoutTrashed()
+                ->includes([
+                    UserResource::class,
+                ]),
+        ])
+        ->widgets([
+            OverlookWidget::class,
+        ]);
+
+    // 1 (from setUp) + 3 (created) = 4 non-trashed users
+    livewire(OverlookWidget::class)
+        ->assertViewHas('data', function ($data) {
+            return $data[0]['count'] === '4';
+        });
+});
+
+it('excludes soft deleted records by default due to SoftDeletes global scope', function () {
+    // setUp creates 1 user for authentication
+    User::factory()->count(3)->create();
+    User::factory()->count(2)->create(['deleted_at' => now()]);
+
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->includes([
+                    UserResource::class,
+                ]),
+        ])
+        ->widgets([
+            OverlookWidget::class,
+        ]);
+
+    // Default SoftDeletes global scope excludes trashed: 1 (from setUp) + 3 = 4
+    livewire(OverlookWidget::class)
+        ->assertViewHas('data', function ($data) {
+            return $data[0]['count'] === '4';
+        });
+});

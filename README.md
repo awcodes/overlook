@@ -132,6 +132,23 @@ public function panel(Panel $panel): Panel
 }
 ```
 
+## Excluding Soft Deleted Records
+
+If your models use soft deletes, you can exclude trashed records from the count with the `withoutTrashed` method on the plugin.
+
+```php
+use Awcodes\Overlook\OverlookPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->withoutTrashed(),
+        ]);
+}
+```
+
 ## Sorting the Items
 
 By default, the items will be sorted in the order they are registered with Filament or as provided in the `includes` method. You can change this to sort them alphabetically with the `alphabetical` method on the plugin.
