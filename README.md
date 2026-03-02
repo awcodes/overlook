@@ -1,10 +1,11 @@
-![overlook-og](https://res.cloudinary.com/aw-codes/image/upload/w_1200,f_auto,q_auto/plugins/overlook/awcodes-overlook.jpg)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
-[![Total Downloads](https://img.shields.io/packagist/dt/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
-
 # Overlook for Filament
 
 A Filament plugin that adds an app overview widget to your admin panel.
+
+[![Latest Version](https://img.shields.io/github/release/awcodes/overlook.svg?style=flat-square)](https://github.com/awcodes/overlook/releases)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Total Downloads](https://img.shields.io/packagist/dt/awcodes/overlook.svg?style=flat-square)](https://packagist.org/packages/awcodes/overlook)
+![GitHub Repo stars](https://img.shields.io/github/stars/awcodes/overlook?style=flat-square)
 
 ## Compatibility
 
