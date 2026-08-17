@@ -1,0 +1,9 @@
+version: 1
+
+title: Overlook
+
+navigation:
+  - index
+  - installation
+  - configuration
+  - customizing-resources
