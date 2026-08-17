@@ -17,6 +17,6 @@ trait HandlesOverlookWidgetCustomization
 
     public static function getOverlookWidgetTitle(): string
     {
-        return $title ?? ucfirst(self::getPluralModelLabel());
+        return static::$title ?? ucfirst(static::getPluralModelLabel());
     }
 }
