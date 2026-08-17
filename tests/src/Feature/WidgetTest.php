@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Tests\Fixtures\Models\User;
 use Awcodes\Overlook\Tests\Fixtures\Resources\Users\CustomUserResource;
+use Awcodes\Overlook\Tests\Fixtures\Resources\Users\TitledUserResource;
 use Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Facades\Filament;
@@ -82,6 +83,42 @@ it('can be customized', function () {
             return $data[0]['count'] === '3'
                 && $data[0]['name'] === 'Unverified Users';
         });
+});
+
+it('uses the $title property when one is set', function () {
+    TitledUserResource::$title = 'Titled Users';
+
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->includes([
+                    TitledUserResource::class,
+                ]),
+        ])
+        ->widgets([
+            OverlookWidget::class,
+        ]);
+
+    livewire(OverlookWidget::class)
+        ->assertSee('Titled Users');
+});
+
+it('falls back to the plural model label when no $title is set', function () {
+    TitledUserResource::$title = null;
+
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()
+                ->includes([
+                    TitledUserResource::class,
+                ]),
+        ])
+        ->widgets([
+            OverlookWidget::class,
+        ]);
+
+    livewire(OverlookWidget::class)
+        ->assertSee('Users');
 });
 
 it('excludes soft deleted records when withoutTrashed is enabled', function () {
