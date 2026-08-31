@@ -1,0 +1,19 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Trait Awcodes\\Overlook\\Concerns\\HandlesOverlookWidgetCustomization is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Concerns/HandlesOverlookWidgetCustomization.php
+
+		-
+			message: '#^Method Awcodes\\Overlook\\OverlookPlugin\:\:get\(\) should return static\(Awcodes\\Overlook\\OverlookPlugin\) but returns Filament\\Contracts\\Plugin\|Filament\\FilamentManager\.$#'
+			identifier: return.type
+			count: 1
+			path: src/OverlookPlugin.php
+
+		-
+			message: '#^Property Awcodes\\Overlook\\Widgets\\OverlookWidget\:\:\$view \(view\-string\) does not accept default value of type string\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Widgets/OverlookWidget.php
