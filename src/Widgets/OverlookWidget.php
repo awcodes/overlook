@@ -40,7 +40,7 @@ class OverlookWidget extends Widget
         $this->data = $this->getData();
 
         if ($this->grid === []) {
-            $this->grid = OverlookPlugin::get()->getColumns();
+            $this->grid = OverlookPlugin::get()->getColumnsConfig();
         }
     }
 

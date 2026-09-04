@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Awcodes\Overlook\OverlookPlugin;
-use Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Facades\Filament;
+use Workbench\App\Filament\Resources\Users\UserResource;
 
 beforeEach(function () {
     $this->panel = Filament::getCurrentOrDefaultPanel();
@@ -132,7 +132,7 @@ it('sets excludes', function () {
         ]);
 
     expect(Filament::getPlugin('awcodes/overlook')->getExcludes())
-        ->toContain('Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource');
+        ->toContain('Workbench\App\Filament\Resources\Users\UserResource');
 });
 
 it('sets excludes with closure', function () {
@@ -144,7 +144,7 @@ it('sets excludes with closure', function () {
         ]);
 
     expect(Filament::getPlugin('awcodes/overlook')->getExcludes())
-        ->toContain('Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource');
+        ->toContain('Workbench\App\Filament\Resources\Users\UserResource');
 });
 
 it('sets includes', function () {
@@ -156,7 +156,7 @@ it('sets includes', function () {
         ]);
 
     expect(Filament::getPlugin('awcodes/overlook')->getIncludes())
-        ->toContain('Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource');
+        ->toContain('Workbench\App\Filament\Resources\Users\UserResource');
 });
 
 it('sets includes with closure', function () {
@@ -168,7 +168,7 @@ it('sets includes with closure', function () {
         ]);
 
     expect(Filament::getPlugin('awcodes/overlook')->getIncludes())
-        ->toContain('Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource');
+        ->toContain('Workbench\App\Filament\Resources\Users\UserResource');
 });
 
 it('sets withoutTrashed', function (bool|Closure|null $condition) {

@@ -238,6 +238,22 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
+## Development
+
+Install dependencies:
+
+    composer install
+
+Run the test suite:
+
+    composer test
+
+Start the Workbench application:
+
+    composer serve
+
+The Workbench opens at `/admin`. Sign in with `test@example.com` and `password`.
+
 ## Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.

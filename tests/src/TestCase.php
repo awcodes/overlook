@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Awcodes\Overlook\Tests;
 
 use Awcodes\Overlook\OverlookServiceProvider;
-use Awcodes\Overlook\Tests\Fixtures\Models\User;
-use Awcodes\Overlook\Tests\Fixtures\Providers\AdminPanelProvider;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
@@ -19,11 +17,12 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-use Illuminate\Support\Facades\Schema;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
+use Workbench\App\Models\User;
+use Workbench\App\Providers\Filament\AdminPanelProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -35,15 +34,6 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->actingAs(User::factory()->create());
-    }
-
-    protected function afterRefreshingDatabase(): void
-    {
-        if (! Schema::hasColumn('users', 'deleted_at')) {
-            Schema::table('users', function ($table) {
-                $table->softDeletes();
-            });
-        }
     }
 
     protected function getPackageProviders($app): array

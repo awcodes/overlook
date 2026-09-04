@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use Awcodes\Overlook\OverlookPlugin;
-use Awcodes\Overlook\Tests\Fixtures\Models\User;
-use Awcodes\Overlook\Tests\Fixtures\Resources\Users\CustomUserResource;
-use Awcodes\Overlook\Tests\Fixtures\Resources\Users\TitledUserResource;
-use Awcodes\Overlook\Tests\Fixtures\Resources\Users\UserResource;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Facades\Filament;
+use Workbench\App\Filament\Resources\Users\CustomUserResource;
+use Workbench\App\Filament\Resources\Users\TitledUserResource;
+use Workbench\App\Filament\Resources\Users\UserResource;
+use Workbench\App\Models\User;
 
 use function Pest\Livewire\livewire;
 
@@ -26,7 +26,15 @@ it('includes default resources', function () {
         ]);
 
     livewire(OverlookWidget::class)
-        ->assertSee('Users');
+        ->assertSee('Users')
+        ->assertSet('grid', [
+            'default' => 2,
+            'sm' => 2,
+            'md' => 3,
+            'lg' => 4,
+            'xl' => 5,
+            '2xl' => null,
+        ]);
 });
 
 it('includes resources', function () {

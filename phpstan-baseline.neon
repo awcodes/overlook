@@ -11,9 +11,3 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: src/OverlookPlugin.php
-
-		-
-			message: '#^Property Awcodes\\Overlook\\Widgets\\OverlookWidget\:\:\$view \(view\-string\) does not accept default value of type string\.$#'
-			identifier: property.defaultValue
-			count: 1
-			path: src/Widgets/OverlookWidget.php
