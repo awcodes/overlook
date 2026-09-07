@@ -4,6 +4,39 @@ includes:
 
 parameters:
     level: 5
+    # A baseline entry that stops matching is not a failure worth breaking CI over.
+    # phpstan resolves under prefer-stable, so an analyser bump can stop reporting an
+    # error with no change to this package — and with the default (true), the now-dead
+    # ignore turns into a hard error: "Ignored error pattern ... was not matched in
+    # reported errors". heatmap-widget's main sat red for three days that way, from an
+    # analyser bump rather than a commit.
+    #
+    # Trade-off: with this false, a stale ignore lingers silently instead of announcing
+    # itself, so baselines accumulate dead entries. That is the cheaper failure — the
+    # entries are harmless, and `--generate-baseline` clears them whenever a package is
+    # next rebaselined. Breaking CI on an unrelated dependency bump is not.
+    reportUnmatchedIgnoredErrors: false
+    # `src` is the only path every package has. phpstan hard-errors with
+    # "Path ... does not exist" on a listed directory that is absent, so extra
+    # paths are opt-in: uncomment `config` / `database` only if this package
+    # actually ships them. Most do not — roughly two thirds of the fleet has no
+    # config/ directory.
     paths:
         - src
+        # The Testbench workbench is dev-only but it is hand-written code that
+        # exercises this package's own public API, so it is analysed like anything
+        # else. Remove this line if the package has no workbench/ — phpstan hard-errors
+        # on a listed path that does not exist, and the `(?)` optional marker works
+        # only in excludePaths, not here.
+        - workbench
+        # - config
+        # - database
+    excludePaths:
+        analyse:
+            # workbench/storage is gitignored, but it appears the moment anyone runs
+            # the workbench app and fills up with compiled Blade — which is not valid
+            # standalone PHP (2,464 errors on one package). CI never sees it, so
+            # without this the config passes in CI and is unusable locally. The `(?)`
+            # marks the path optional so this does not itself hard-error in CI.
+            - workbench/storage (?)
     tmpDir: build/phpstan

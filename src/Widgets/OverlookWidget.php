@@ -25,7 +25,7 @@ class OverlookWidget extends Widget
 
     protected string $view = 'overlook::widget';
 
-    protected int|string|array $columnSpan = 'full';
+    protected int | string | array $columnSpan = 'full';
 
     public static function getSort(): int
     {
@@ -44,7 +44,7 @@ class OverlookWidget extends Widget
         }
     }
 
-    public function convertCount(string|int|float $number): string
+    public function convertCount(string | int | float $number): string
     {
         if (OverlookPlugin::get()->shouldAbbreviateCount()) {
             return Number::abbreviate((int) $number);
@@ -53,7 +53,7 @@ class OverlookWidget extends Widget
         return $this->formatRawCount($number);
     }
 
-    public function formatRawCount(string|int|float $number): string
+    public function formatRawCount(string | int | float $number): string
     {
         return number_format((int) $number);
     }

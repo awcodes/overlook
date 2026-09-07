@@ -32,7 +32,7 @@ it('can register the widget', function () {
     expect(Filament::getWidgets())->toContain('Awcodes\Overlook\Widgets\OverlookWidget');
 });
 
-it('sets alphabetical order', function (bool|Closure|null $condition) {
+it('sets alphabetical order', function (bool | Closure | null $condition) {
     $this->panel
         ->plugins([
             OverlookPlugin::make()->alphabetical($condition),
@@ -47,7 +47,7 @@ it('sets alphabetical order', function (bool|Closure|null $condition) {
     fn () => false,
 ]);
 
-it('sets abbreviated', function (bool|Closure|null $condition) {
+it('sets abbreviated', function (bool | Closure | null $condition) {
     $this->panel
         ->plugins([
             OverlookPlugin::make()->abbreviateCount($condition),
@@ -62,7 +62,7 @@ it('sets abbreviated', function (bool|Closure|null $condition) {
     fn () => false,
 ]);
 
-it('sets sort order', function (int|Closure $condition) {
+it('sets sort order', function (int | Closure $condition) {
     $this->panel
         ->plugins([
             OverlookPlugin::make()->sort($condition),
@@ -76,7 +76,7 @@ it('sets sort order', function (int|Closure $condition) {
     fn () => 1,
 ]);
 
-it('sets tooltips', function (bool|Closure|null $condition) {
+it('sets tooltips', function (bool | Closure | null $condition) {
     $this->panel
         ->plugins([
             OverlookPlugin::make()->tooltips($condition),
@@ -171,7 +171,7 @@ it('sets includes with closure', function () {
         ->toContain('Workbench\App\Filament\Resources\Users\UserResource');
 });
 
-it('sets withoutTrashed', function (bool|Closure|null $condition) {
+it('sets withoutTrashed', function (bool | Closure | null $condition) {
     $this->panel
         ->plugins([
             OverlookPlugin::make()->withoutTrashed($condition),
