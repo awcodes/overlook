@@ -28,6 +28,7 @@
         "spatie/laravel-package-tools": "^1.15"
     },
     "require-dev": {
+        "awcodes/focus": "^0.1",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
         "orchestra/testbench": "^9.0|^10.0|^11.0",
@@ -78,6 +79,10 @@
             "Composer\\Config::disableProcessTimeout",
             "@build",
             "@php vendor/bin/testbench serve --ansi"
+        ],
+        "focus": [
+            "Composer\\Config::disableProcessTimeout",
+            "focus"
         ]
     },
     "config": {
