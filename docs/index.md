@@ -18,6 +18,9 @@ By default, every resource registered with the current panel gets a card. Two th
 
 Each card shows the resource's plural model label, its navigation icon, and the record count, and links to the resource's index page.
 
+![A Filament dashboard with the Overlook widget showing cards for Pages (4), Posts (12) and Users (8)](assets/dashboard-light.png#gh-light-mode-only)
+![A Filament dashboard with the Overlook widget showing cards for Pages (4), Posts (12) and Users (8)](assets/dashboard-dark.png#gh-dark-mode-only)
+
 ## How counts are produced
 
 Overlook calls each resource's own `getEloquentQuery()` and counts the result. Because that is the same query the resource's table is built from, any global scopes or query customisation you already have are respected — the count matches what the user would see on the list page.

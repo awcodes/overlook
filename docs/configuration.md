@@ -41,7 +41,15 @@ OverlookPlugin::make()
     ])
 ```
 
-Without it, the widget renders a single column at every width, so setting this is usually the first thing you want to do.
+Without it, the widget uses two columns on small screens, three at `md`, four at `lg`, and five at `xl`. On a wide screen, three resources fill three of the five columns:
+
+![The Overlook widget at desktop width: Pages, Posts and Users cards in the first three of five columns](assets/widget-light.png#gh-light-mode-only)
+![The Overlook widget at desktop width: Pages, Posts and Users cards in the first three of five columns](assets/widget-dark.png#gh-dark-mode-only)
+
+On a phone, the same cards wrap two to a row:
+
+![The Overlook widget at phone width: Pages and Posts cards side by side, with Users on a second row](assets/widget-mobile-light.png#gh-light-mode-only)
+![The Overlook widget at phone width: Pages and Posts cards side by side, with Users on a second row](assets/widget-mobile-dark.png#gh-dark-mode-only)
 
 Keys are Filament's breakpoint names, and any you leave out inherit the next smallest. Passing a plain integer instead of an array sets the `lg` breakpoint only.
 
