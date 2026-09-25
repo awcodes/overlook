@@ -5,19 +5,16 @@ description: Install Overlook, register the plugin and widget with a panel, and 
 
 # Installation
 
-## Requirements
+## Compatibility
 
-- PHP 8.2 or higher
-- Filament 4.x or 5.x
+| Filament version | Package version |
+|------------------|-----------------|
+| 2.x              | 1.x             |
+| 3.x              | 2.x             |
+| 4.x              | 3.x             |
+| 4.x & 5.x        | 4.x             |
 
-Earlier releases of this package support earlier versions of Filament:
-
-| Package Version | Filament Version |
-| --- | --- |
-| 1.x | 2.x |
-| 2.x | 3.x |
-| 3.x | 4.x |
-| 4.x | 4.x & 5.x |
+Overlook requires PHP 8.2 or later, the `intl` extension, and `filament/filament`.
 
 ## Install the package
 
