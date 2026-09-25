@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Awcodes\Focus\Enums\Viewport;
 use Awcodes\Focus\Screenshot;
 use Awcodes\Focus\ScreenshotSuite;
-use Playwright\Page\PageInterface;
 
 /*
  * Documentation screenshots for Overlook, generated with awcodes/focus from the
@@ -19,12 +18,8 @@ return ScreenshotSuite::make()
             // The dashboard holds only the widget; a full-height viewport is mostly empty page.
             ->viewportSize(1440, 420)
             ->visit('/admin')
-            // Filament's default avatar is lazy-loaded from ui-avatars.com, which Focus's
-            // readiness check does not wait for and which needs the network. Hidden, not
-            // removed, so the top bar keeps its layout.
-            ->beforeCapture(fn (PageInterface $page): PageInterface => $page->addStyleTag([
-                'content' => '.fi-user-avatar { visibility: hidden !important; }',
-            ]))
+            // Filament's default avatar comes from ui-avatars.com, so it needs the network.
+            ->hide('.fi-user-avatar')
             ->viewport(),
 
         Screenshot::make('widget')
