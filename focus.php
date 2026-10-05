@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Awcodes\Focus\Card;
 use Awcodes\Focus\Enums\Size;
-use Awcodes\Focus\Enums\Theme;
 use Awcodes\Focus\Enums\Viewport;
 use Awcodes\Focus\Screenshot;
 use Awcodes\Focus\ScreenshotSuite;
@@ -39,12 +38,13 @@ return ScreenshotSuite::make()
             ->focus('#overlook-widget'),
 
         // Share-image sources, shaped to the card templates' screenshot slots. The two-up templates show slot 1
-        // dark and slot 2 light, so the dashboard is captured dark and the widget in both themes.
+        // dark, small and in front at the lower left, and slot 2 light as the large screenshot at the back on the
+        // right. The dashboard is the main subject, so it takes the large light slot and the widget the small dark
+        // one; both are captured in both themes.
         Screenshot::make('card-dashboard')
             ->viewportSize(...$cardDashboard)
             ->visit('/admin')
-            ->viewport()
-            ->themes([Theme::Dark]),
+            ->viewport(),
 
         Screenshot::make('card-widget')
             // A narrower page narrows the full-width widget, so its crop comes out close to the slot's shape.
@@ -53,17 +53,17 @@ return ScreenshotSuite::make()
             ->focus('#overlook-widget')
             ->minSize(...$cardWidget),
     ])
-    ->cardTemplates('https://github.com/awcodes/focus-templates/tree/v1.1.1/dist')
+    ->cardTemplates('https://github.com/awcodes/focus-templates/tree/v2.0.0/dist')
     ->cards([
         // Open Graph and the GitHub social preview share one 2400x1260 template; GitHub crops 30px top and bottom.
         Card::make('social')
             ->template('two-up-wide')
-            ->screenshots(['card-dashboard', 'card-widget'])
+            ->screenshots(['card-widget', 'card-dashboard'])
             ->sizes([Size::OpenGraph, Size::GitHubSocial]),
 
         // The Filament plugin directory's 2560x1440 thumbnail.
         Card::make('thumbnail')
             ->template('two-up')
-            ->screenshots(['card-dashboard', 'card-widget'])
+            ->screenshots(['card-widget', 'card-dashboard'])
             ->sizes([Size::Filament]),
     ]);
