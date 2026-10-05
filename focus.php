@@ -53,7 +53,7 @@ return ScreenshotSuite::make()
             ->focus('#overlook-widget')
             ->minSize(...$cardWidget),
     ])
-    ->cardTemplates('https://github.com/awcodes/focus-templates/tree/v2.0.0/dist')
+    ->cardTemplates('https://github.com/awcodes/focus-templates/tree/v2.1.0/dist')
     ->cards([
         // Open Graph and the GitHub social preview share one 2400x1260 template; GitHub crops 30px top and bottom.
         Card::make('social')
@@ -66,4 +66,11 @@ return ScreenshotSuite::make()
             ->template('two-up')
             ->screenshots(['card-widget', 'card-dashboard'])
             ->sizes([Size::Filament]),
+
+        // Unbranded 16:9 image for aw.codes, which adds its own heading: the same screenshots, no text or logo.
+        Card::make('plain')
+            ->template('two-up-plain')
+            ->screenshots(['card-widget', 'card-dashboard'])
+            ->sizes([[2560, 1440]])
+            ->scale(1),
     ]);
