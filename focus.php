@@ -27,8 +27,6 @@ return ScreenshotSuite::make()
             // The dashboard holds only the widget; a full-height viewport is mostly empty page.
             ->viewportSize(1440, 420)
             ->visit('/admin')
-            // Filament's default avatar comes from ui-avatars.com, so it needs the network.
-            ->hide('.fi-user-avatar')
             ->viewport(),
 
         Screenshot::make('widget')
@@ -45,7 +43,6 @@ return ScreenshotSuite::make()
         Screenshot::make('card-dashboard')
             ->viewportSize(...$cardDashboard)
             ->visit('/admin')
-            ->hide('.fi-user-avatar')
             ->viewport()
             ->themes([Theme::Dark]),
 
@@ -53,7 +50,6 @@ return ScreenshotSuite::make()
             // A narrower page narrows the full-width widget, so its crop comes out close to the slot's shape.
             ->viewportSize(...$cardDashboard)
             ->visit('/admin')
-            ->hide('.fi-user-avatar')
             ->focus('#overlook-widget')
             ->minSize(...$cardWidget),
     ])
