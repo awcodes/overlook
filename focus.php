@@ -57,8 +57,8 @@ return ScreenshotSuite::make()
     ->cards([
         // Open Graph and the GitHub social preview share one 2400x1260 template; GitHub crops 30px top and bottom.
         Card::make('social')
-            ->template('one-up-wide')
-            ->screenshots(['card-widget'])
+            ->template('two-up-wide')
+            ->screenshots(['card-dashboard', 'card-widget'])
             ->sizes([Size::OpenGraph, Size::GitHubSocial]),
 
         // The Filament plugin directory's 2560x1440 thumbnail.
