@@ -73,7 +73,11 @@ class OverlookPlugin implements Plugin
 
     public function getColumnsConfig(): array
     {
-        return $this->columns ?? [
+        if ($this->hasCustomColumns()) {
+            return $this->getAllColumns();
+        }
+
+        return [
             'default' => 2,
             'sm' => 2,
             'md' => 3,

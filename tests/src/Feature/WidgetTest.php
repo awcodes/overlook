@@ -175,3 +175,22 @@ it('excludes soft deleted records by default due to SoftDeletes global scope', f
             return $data[0]['count'] === '4';
         });
 });
+
+it('resolves the configured columns', function (array | int | Closure $columns, array $grid) {
+    $this->panel
+        ->plugins([
+            OverlookPlugin::make()->columns($columns),
+        ])
+        ->widgets([
+            OverlookWidget::class,
+        ]);
+
+    livewire(OverlookWidget::class)
+        ->assertSet('grid', $grid);
+})->with([
+    'an integer' => [4, ['lg' => 4]],
+    'breakpoints' => [['sm' => 2, 'lg' => 4], ['sm' => 2, 'lg' => 4]],
+    // Pest calls a dataset closure itself, so the outer closure hands the plugin the inner one.
+    'a closure' => [fn () => fn () => 3, ['lg' => 3]],
+    'a closure per breakpoint' => [['md' => fn () => 3], ['md' => 3]],
+]);
